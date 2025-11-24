@@ -1,129 +1,284 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diego Martín-Romo | Data & Business Analytics</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Diego Martín-Romo — Data & Business Analytics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+    :root{
+      --blue:#0A66C2;
+      --muted:#e9eef9;
+      --card-bg:#ffffff;
+      --text:#222;
+      --radius:12px;
+      --shadow: 0 6px 20px rgba(10,102,194,0.07);
+      --glass: rgba(255,255,255,0.6);
+      --container:1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: 'Roboto', sans-serif;
+      background:linear-gradient(180deg,#f7f9fc, #f8f9fb);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
 
-  body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    background: #f8f9fa;
-    color: #222;
-  }
+    /* top fixed header (photo + name) */
+    .topbar {
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      display:flex;
+      align-items:center;
+      gap:18px;
+      padding:10px 20px;
+      background:var(--blue);
+      color:#fff;
+      z-index:1100;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .topbar .profile {
+      display:flex;
+      align-items:center;
+      gap:14px;
+      max-width:var(--container);
+      margin:0 auto;
+      width:100%;
+    }
+    .avatar{
+      width:56px;height:56px;border-radius:50%;flex-shrink:0;
+      overflow:hidden;border:3px solid rgba(255,255,255,0.12);
+      background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      display:flex;align-items:center;justify-content:center;
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .title{
+      display:flex;flex-direction:column;line-height:1;
+    }
+    .title .name{font-weight:700;font-size:1.05rem;letter-spacing:0.2px}
+    .title .tag{font-weight:500;opacity:0.95;font-size:0.86rem}
 
-  /* Cabecera fija con nombre y título */
-  header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: #0A66C2;
-    color: white;
-    text-align: center;
-    padding: 0.7rem 0;
-    font-size: 1rem;
-    font-weight: 500;
-    z-index: 1001;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
+    /* second nav */
+    nav {
+      position: fixed;
+      top:72px;
+      left:0; right:0;
+      z-index:1090;
+      background:var(--muted);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    nav .wrap{
+      max-width:var(--container);
+      margin:0 auto;
+      padding:10px 20px;
+      display:flex;
+      gap:18px;
+      align-items:center;
+    }
+    nav a{
+      text-decoration:none;color:var(--blue);font-weight:600;padding:8px 10px;border-radius:8px;
+    }
+    nav a:hover{background:rgba(10,102,194,0.06)}
 
-  nav {
-    position: fixed;
-    top: 48px; /* justo debajo del header */
-    width: 100%;
-    background: #e3eaf5;
-    padding: 0.6rem;
-    text-align: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    z-index: 1000;
-  }
+    /* page container (leave space for fixed header+nav) */
+    main{padding-top:140px;max-width:var(--container);margin:0 auto;padding-left:20px;padding-right:20px}
 
-  nav a {
-    margin: 0 1rem;
-    color: #0A66C2;
-    text-decoration: none;
-    font-weight: 600;
-  }
+    /* hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:28px;
+      align-items:center;
+      margin-bottom:28px;
+    }
+    .hero .intro{
+      background:linear-gradient(180deg, #fff, #fbfdff);
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:var(--shadow);
+    }
+    .intro h1{margin:0;font-size:1.45rem;color:var(--blue)}
+    .intro p{margin:12px 0 0;line-height:1.5;color:#334155}
+    .cta-row{display:flex;gap:12px;margin-top:18px;align-items:center}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;
+      background:var(--blue);color:#fff;text-decoration:none;font-weight:600;font-size:0.95rem;
+      box-shadow:0 6px 18px rgba(10,102,194,0.12);
+    }
+    .btn.secondary{
+      background:transparent;color:var(--blue);border:1px solid rgba(10,102,194,0.08);
+      box-shadow:none;
+    }
 
-  /* espacio para que el contenido no quede tapado */
-  section {
-    padding: 2rem 10%;
-    max-width: 900px;
-    margin: 110px auto 0 auto; /* margen superior */
-  }
+    /* specialties */
+    .specs{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;margin-top:18px;
+    }
+    .spec{
+      background:var(--card-bg);padding:14px;border-radius:10px;box-shadow: 0 4px 12px rgba(16,24,40,0.04);
+      display:flex;gap:12px;align-items:flex-start;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .spec:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(10,102,194,0.08)}
+    .spec svg{flex-shrink:0;width:36px;height:36px}
+    .spec h4{margin:0;font-size:0.98rem;color:var(--blue)}
+    .spec p{margin:6px 0 0;font-size:0.88rem;color:#475569}
 
-  h1, h2 {
-    color: #0A66C2;
-  }
+    /* projects preview */
+    .projects {
+      margin-top:26px;
+      display:grid;gap:14px;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    }
+    .proj{
+      background:white;border-radius:12px;padding:14px;box-shadow:var(--shadow);
+      transition: transform .18s ease;cursor:pointer;
+    }
+    .proj:hover{transform:translateY(-6px)}
+    .proj h3{margin:0;color:var(--blue);font-size:1rem}
+    .proj p{margin:8px 0 0;color:#475569;font-size:0.88rem}
+    .proj .tags{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:#f1f6ff;color:var(--blue);font-weight:600}
 
-  .card {
-    background: white;
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    margin-bottom: 1.5rem;
-  }
+    /* footer */
+    footer{margin-top:36px;padding:40px 20px;text-align:center;color:#64748b}
 
-  footer {
-    text-align: center;
-    padding: 1rem;
-    background: #0A66C2;
-    color: white;
-    font-size: 0.9rem;
-  }
-</style>
-
-
+    /* responsive */
+    @media(max-width:980px){
+      .hero{grid-template-columns: 1fr}
+      nav .wrap{justify-content:center}
+      .specs{grid-template-columns:1fr}
+    }
+    @media(max-width:520px){
+      .topbar .profile{gap:10px}
+      .title .name{font-size:.98rem}
+      .title .tag{font-size:.78rem}
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Diego Martín-Romo</h1>
-    <p>Matemático · Business Controller · Data Analyst</p>
-  </header>
 
- <nav>
-  <a href="#about">Sobre mí</a>
-  <a href="proyectos.html">Proyectos</a>
-  <a href="#contact">Contacto</a>
-</nav>
+  <!-- TOPBAR: photo + name (fixed) -->
+  <div class="topbar">
+    <div class="profile">
+      <div class="avatar" aria-hidden="true">
+        <!-- Replace src with https://raw.githubusercontent.com/.../main/FotoCV.jpg if needed -->
+        <img src="/mnt/data/FotoCV.jpg" alt="Diego Martín-Romo">
+      </div>
+      <div class="title">
+        <div class="name">Diego Martín-Romo</div>
+        <div class="tag">Mathematician · Data Analyst · Business Controller</div>
+      </div>
+      <div style="margin-left:auto; display:flex; gap:8px; align-items:center">
+        <a class="btn" href="proyectos.html">Proyectos</a>
+        <a class="btn secondary" href="https://raw.githubusercontent.com/diegomartinromo/diegomartinromo.github.io/main/CV_Diego_Martin-Romo.pdf" target="_blank">Descargar CV</a>
+      </div>
+    </div>
+  </div>
 
-  <section id="about">
-    <h2>Sobre mí</h2>
-    <div class="card">
-      <p>Licenciado en Matemáticas y Máster en Big Data. Experiencia en análisis de datos, planificación de demanda y automatización de procesos en el sector retail. 
-      Actualmente coordino el área de Home Merchandising en El Corte Inglés, desarrollando herramientas analíticas y de reporting para más de 50 departamentos.</p>
+  <!-- NAV -->
+  <nav>
+    <div class="wrap">
+      <a href="#about">Sobre mí</a>
+      <a href="#skills">Especialidades</a>
+      <a href="#work">Proyectos</a>
+      <a href="#contact">Contacto</a>
     </div>
-  </section>
+  </nav>
 
-  <section id="projects">
-    <h2>Proyectos y herramientas</h2>
-    <div class="card">
-      <h3>Informe semanal de ventas Hogar</h3>
-      <p>Consolidación SAS/SQL de datos de ventas y stock para 50 divisiones. Reporte automático validado para Dirección en <24h.</p>
-    </div>
-    <div class="card">
-      <h3>Sistema de alertas de surtidos</h3>
-      <p>Herramienta de detección automática de errores en surtidos y codificaciones. Mejora la calidad del dato y reduce roturas de stock.</p>
-    </div>
-    <div class="card">
-      <h3>Base de datos de consulta Hogar</h3>
-      <p>Repositorio centralizado de referencias y KPIs. Permite análisis homogéneos y comparables entre divisiones.</p>
-    </div>
-  </section>
+  <main>
+    <section class="hero" id="about">
+      <div class="intro">
+        <h1>Transformo datos en decisiones operativas y estratégicas</h1>
+        <p>Soy matemático con Máster en Big Data. Coordino el área de Home Merchandising en El Corte Inglés, liderando la automatización de reporting y la mejora de la calidad del dato para más de 50 departamentos. Combino análisis estadístico, ingeniería de datos y visión comercial para impulsar eficiencia y rentabilidad.</p>
 
-  <section id="contact">
-    <h2>Contacto</h2>
-    <div class="card">
-      <p>📧 <a href="mailto:diego.martinromo@gmail.com">diego.martinromo@gmail.com</a></p>
-      <p>🔗 <a href="https://www.linkedin.com/in/diego-martinromo" target="_blank">LinkedIn</a></p>
-      <p>📊 <a href="https://github.com/diegomartinromo" target="_blank">GitHub</a></p>
-    </div>
-  </section>
+        <div class="cta-row">
+          <a class="btn" href="mailto:diego.martinromo@gmail.com">Contactar</a>
+          <a class="btn secondary" href="https://www.linkedin.com/in/diego-martinromo" target="_blank">LinkedIn</a>
+        </div>
 
-  <footer>
-    © 2025 Diego Martín-Romo
-  </footer>
+        <div id="skills" class="specs" style="margin-top:18px">
+          <div class="spec">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="#e9f1ff"/><path d="M6 15l4-6 4 6 4-8" stroke="#0A66C2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div>
+              <h4>Data Analytics & Reporting</h4>
+              <p>Diseño de reporting corporativo y cuadros de mando para dirección.</p>
+            </div>
+          </div>
+
+          <div class="spec">
+            <svg viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#fff7ed"/><path d="M8 12h8M12 8v8" stroke="#ff8a00" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div>
+              <h4>Process Automation</h4>
+              <p>SAS • SQL • Python; automatización de ETL y procesos de reporting.</p>
+            </div>
+          </div>
+
+          <div class="spec">
+            <svg viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#f1f8f5"/><path d="M12 6v6l4 2" stroke="#07a77a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div>
+              <h4>Demand Planning & Forecasting</h4>
+              <p>Modelos de previsión y optimización de inventario en entornos retail.</p>
+            </div>
+          </div>
+
+          <div class="spec">
+            <svg viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#f6f7ff"/><path d="M4 12h16M12 4v16" stroke="#6b46c1" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <div>
+              <h4>Business Performance Analysis</h4>
+              <p>Análisis P&L, mix compra/venta y métricas de rentabilidad (EBIT).</p>
+            </div>
+          </div>
+
+          <div class="spec">
+            <svg viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#fef7ff"/><path d="M6 9l3 3 5-5 4 4" stroke="#b832d6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div>
+              <h4>Team Leadership & Training</h4>
+              <p>Coordinación de equipos y formación a +120 usuarios en herramientas analíticas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside style="padding:8px">
+        <div style="background:linear-gradient(180deg,#fff,#fbfdff);border-radius:12px;padding:16px;box-shadow:var(--shadow)">
+          <h3 style="margin:0 0 8px 0;color:var(--blue)">Proyectos destacados</h3>
+          <div class="projects" id="work">
+            <a class="proj" href="proyectos.html#p1">
+              <h3>Informe semanal de ventas</h3>
+              <p>Consolidación automática SAS/SQL para 50 divisiones; reporte validado para Dirección en <24h.</p>
+              <div class="tags"><span class="tag">SAS</span><span class="tag">SQL</span></div>
+            </a>
+
+            <a class="proj" href="proyectos.html#p2">
+              <h3>Sistema alertas de surtidos</h3>
+              <p>Detección automática de errores de codificación y surtido para reducir roturas.</p>
+              <div class="tags"><span class="tag">SAS</span><span class="tag">Python</span></div>
+            </a>
+
+            <a class="proj" href="proyectos.html#p3">
+              <h3>Base de datos Hogar</h3>
+              <p>Repositorio centralizado de referencias y KPIs para análisis homogéneo.</p>
+              <div class="tags"><span class="tag">SQL</span><span class="tag">Excel</span></div>
+            </a>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <footer id="contact">
+      <div style="max-width:900px;margin:0 auto">
+        <p><strong>Contacto:</strong> <a href="mailto:diego.martinromo@gmail.com">diego.martinromo@gmail.com</a> · <a href="https://www.linkedin.com/in/diego-martinromo" target="_blank">LinkedIn</a> · <a href="https://github.com/diegomartinromo" target="_blank">GitHub</a></p>
+        <p style="font-size:0.9rem;color:#94a3b8">© 2025 Diego Martín-Romo — Mathematician · Data Analyst · Business Controller</p>
+      </div>
+    </footer>
+  </main>
 </body>
 </html>
