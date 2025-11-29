@@ -5,75 +5,184 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Proyectos — Diego Martín-Romo</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
   <style>
-    :root{--blue:#0A66C2;--muted:#e9eef9;--card:#fff;border-radius:12px}
-    *{box-sizing:border-box}body{font-family:'Roboto',sans-serif;margin:0;background:#f7f9fc;color:#111}
-    nav{position:fixed;top:0;left:0;right:0;background:var(--muted);padding:12px 20px;box-shadow:0 2px 6px rgba(0,0,0,0.05);z-index:1000}
-    nav .wrap{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:12px}
-    nav a{color:var(--blue);text-decoration:none;font-weight:600}
-    header{margin-top:64px;padding:28px 20px;background:linear-gradient(180deg,#fff,#f8fbff);border-bottom:1px solid #eef3fb}
+    :root{--blue:#0A66C2;--bg:#f7f9fc;--card:#fff;--radius:12px}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'Roboto',sans-serif;background:var(--bg);color:#111}
+
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:1000;
+      background:#e9eef9;padding:12px 20px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.06)
+    }
+    nav .wrap{
+      max-width:1100px;margin:0 auto;display:flex;gap:16px;align-items:center
+    }
+    nav a{text-decoration:none;color:var(--blue);font-weight:600}
+
+    header{
+      margin-top:72px;padding:32px 20px;background:white;
+      border-bottom:1px solid #eef3fb
+    }
     header h1{margin:0;color:var(--blue)}
-    main{max-width:1100px;margin:20px auto;padding:20px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
-    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(10,102,194,0.04);transition:transform .16s}
+    header p{margin-top:8px;color:#475569}
+
+    main{
+      max-width:1100px;margin:24px auto;padding:20px
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:18px
+    }
+
+    .card{
+      background:var(--card);padding:18px;border-radius:var(--radius);
+      box-shadow:0 10px 30px rgba(10,102,194,0.04);
+      transition:transform .16s;
+    }
     .card:hover{transform:translateY(-6px)}
-    .card h3{margin:0;color:var(--blue)}
-    .meta{color:#64748b;font-size:13px;margin-top:8px}
-    .stack{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
-    .pill{background:#f1f6ff;color:var(--blue);padding:6px 8px;border-radius:999px;font-weight:600;font-size:12px}
-    .more{display:inline-block;margin-top:12px;padding:8px 10px;border-radius:10px;background:transparent;border:1px solid rgba(10,102,194,0.08);color:var(--blue);text-decoration:none;font-weight:600}
-    footer{padding:30px;text-align:center;color:#94a3b8}
-    @media(max-width:720px){header{padding:18px}}
+
+    .card h3{margin:0;color:var(--blue);font-size:1.05rem}
+    .meta{color:#64748b;font-size:14px;margin-top:8px;line-height:1.45}
+
+    .stack{
+      display:flex;gap:8px;margin-top:12px;flex-wrap:wrap
+    }
+    .pill{
+      padding:6px 8px;font-size:12px;font-weight:600;
+      background:#f1f6ff;color:var(--blue);border-radius:999px
+    }
+
+    .more{
+      display:inline-block;margin-top:12px;padding:8px 10px;
+      border-radius:8px;font-weight:600;
+      text-decoration:none;color:var(--blue);
+      border:1px solid rgba(10,102,194,0.18)
+    }
+    .more:hover{background:#f1f6ff}
+
+    footer{
+      text-align:center;color:#94a3b8;font-size:.9rem;
+      margin:40px 0 20px
+    }
   </style>
 </head>
+
 <body>
 
-  <nav><div class="wrap"><a href="index.html">Inicio</a> · <a href="proyectos.html">Proyectos</a> · <a href="index.html#contact">Contacto</a></div></nav>
+<nav>
+  <div class="wrap">
+    <a href="index.html">Inicio</a>
+    <a href="proyectos.html">Proyectos</a>
+    <a href="index.html#contact">Contacto</a>
+  </div>
+</nav>
 
-  <header>
-    <h1>Proyectos seleccionados</h1>
-    <p style="margin:8px 0 0;color:#475569">Tarjetas con descripción breve. Haz clic en "Ver más" para acceder a la ficha técnica completa.</p>
-  </header>
+<header>
+  <h1>Proyectos seleccionados</h1>
+  <p>Soluciones reales que mejoran procesos, rentabilidad y eficiencia corporativa.</p>
+</header>
 
-  <main>
-    <div class="grid">
-      <div class="card" id="p1">
-        <h3>Informe semanal de ventas (Hogar)</h3>
-        <div class="meta">Consolidación automática SAS/SQL de ventas, stock y cobertura para 50 divisiones. Entrega validada para Dirección en menos de 24h.</div>
-        <div class="stack"><span class="pill">SAS</span><span class="pill">SQL</span><span class="pill">Excel</span></div>
-        <a class="more" href="proyecto-informe-semanal.html">Ver proyecto</a>
+<main>
+  <div class="grid">
+
+    <!-- Proyecto 1 -->
+    <div class="card" id="p1">
+      <h3>Informe semanal de ventas</h3>
+      <div class="meta">
+        Consolidación automática SAS/SQL para más de 50 divisiones del área Hogar.
+        Reporte validado para Dirección en menos de 24h.
       </div>
-
-      <div class="card" id="p2">
-        <h3>Sistema de alertas de surtidos</h3>
-        <div class="meta">Detección automática de errores de codificación y surtido, con workflow para corrección y trazabilidad.</div>
-        <div class="stack"><span class="pill">SAS</span><span class="pill">Python</span></div>
-        <a class="more" href="proyecto-alertas-surtidos.html">Ver proyecto</a>
+      <div class="stack">
+        <span class="pill">SAS</span>
+        <span class="pill">SQL</span>
+        <span class="pill">Excel</span>
       </div>
-
-      <div class="card" id="p3">
-        <h3>Base de datos de consulta Hogar</h3>
-        <div class="meta">Repositorio central para buyers y merchandisers con KPIs comparables por referencia y centro.</div>
-        <div class="stack"><span class="pill">SQL</span><span class="pill">SAS</span></div>
-        <a class="more" href="proyecto-base-hogar.html">Ver proyecto</a>
-      </div>
-
-      <div class="card" id="p4">
-        <h3>Informe de promociones y elasticidades</h3>
-        <div class="meta">Modelo analítico para medir elasticidad de promociones y su impacto en margen y ventas.</div>
-        <div class="stack"><span class="pill">R</span><span class="pill">SAS</span></div>
-        <a class="more" href="proyecto-elasticidades.html">Ver proyecto</a>
-      </div>
-
-      <div class="card" id="p5">
-        <h3>Automatización de reporting</h3>
-        <div class="meta">Pipeline que integra extracción, validación y distribución automática de informes a equipos y Dirección.</div>
-        <div class="stack"><span class="pill">Python</span><span class="pill">SAS</span><span class="pill">SQL</span></div>
-        <a class="more" href="proyecto-automation-reporting.html">Ver proyecto</a>
-      </div>
+      <a class="more" href="proyecto-informe-semanal.html">Ver proyecto</a>
     </div>
-  </main>
 
-  <footer>© 2025 Diego Martín-Romo — Mathematician · Data Analyst · Business Controller</footer>
+    <!-- Proyecto 2 -->
+    <div class="card" id="p2">
+      <h3>Sistema de alertas de surtidos</h3>
+      <div class="meta">
+        Detección automática de errores en codificación y surtido,
+        con trazabilidad para corrección y prevención de roturas.
+      </div>
+      <div class="stack">
+        <span class="pill">SAS</span>
+        <span class="pill">Python</span>
+      </div>
+      <a class="more" href="proyecto-alertas-surtidos.html">Ver proyecto</a>
+    </div>
+
+    <!-- Proyecto 3 -->
+    <div class="card" id="p3">
+      <h3>Base de datos de consulta Hogar</h3>
+      <div class="meta">
+        Repositorio único para KPIs, referencias y análisis homogéneo
+        entre departamentos y centros.
+      </div>
+      <div class="stack">
+        <span class="pill">SQL</span>
+        <span class="pill">SAS</span>
+      </div>
+      <a class="more" href="proyecto-base-hogar.html">Ver proyecto</a>
+    </div>
+
+    <!-- Proyecto 4 -->
+    <div class="card" id="p4">
+      <h3>Informe de promociones y elasticidades</h3>
+      <div class="meta">
+        Modelo analítico para medir impacto de promociones sobre ventas,
+        márgenes y elasticidades por categoría.
+      </div>
+      <div class="stack">
+        <span class="pill">R</span>
+        <span class="pill">SAS</span>
+      </div>
+      <a class="more" href="proyecto-elasticidades.html">Ver proyecto</a>
+    </div>
+
+    <!-- Proyecto 5 -->
+    <div class="card" id="p5">
+      <h3>Automatización de reporting corporativo</h3>
+      <div class="meta">
+        Pipeline completo desde extracción hasta distribución automática
+        para equipos y Dirección.
+      </div>
+      <div class="stack">
+        <span class="pill">Python</span>
+        <span class="pill">SAS</span>
+        <span class="pill">SQL</span>
+      </div>
+      <a class="more" href="proyecto-automation-reporting.html">Ver proyecto</a>
+    </div>
+
+    <!-- Proyecto NUEVO -->
+    <div class="card" id="p6">
+      <h3>Comunidad Hogar – Centralized Retail Workflow System</h3>
+      <div class="meta">
+        Plataforma que centraliza las solicitudes de tiendas hacia Compras,
+        eliminando correos manuales, estandarizando procesos y garantizando
+        trazabilidad y disponibilidad de stock.
+      </div>
+      <div class="stack">
+        <span class="pill">SAS</span>
+        <span class="pill">SQL</span>
+        <span class="pill">Process Automation</span>
+      </div>
+      <a class="more" href="proyecto-comunidad-hogar.html">Ver proyecto</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  © 2025 Diego Martín-Romo — Mathematician · Data Analyst · Business Controller
+</footer>
+
 </body>
 </html>
