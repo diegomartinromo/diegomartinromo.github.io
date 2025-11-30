@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Comunidad Hogar – Centralized Retail Workflow System</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  body{font-family:'Roboto',sans-serif;background:#f7f9fc;margin:0;color:#111}
+  nav{position:fixed;top:0;left:0;right:0;background:#e9eef9;padding:12px 20px;box-shadow:0 2px 6px rgba(0,0,0,0.05);z-index:1000}
+  nav .wrap{max-width:1100px;margin:0 auto;display:flex;gap:16px}
+  nav a{text-decoration:none;color:#0A66C2;font-weight:600}
+  header{margin-top:72px;padding:34px 20px;background:white;border-bottom:1px solid #eef3fb}
+  header h1{margin:0;color:#0A66C2;font-size:1.5rem}
+  header p{margin-top:8px;color:#334155;font-size:1rem;line-height:1.45}
+  main{max-width:1100px;margin:32px auto;padding:24px;background:white;border-radius:12px;box-shadow:0 12px 32px rgba(10,102,194,0.04)}
+  h2{color:#0A66C2;margin-top:32px}
+  p{line-height:1.55}
+  ul{line-height:1.55;margin-top:8px}
+  .stack{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .pill{background:#f1f6ff;color:#0A66C2;padding:6px 8px;border-radius:999px;font-size:12px;font-weight:600}
+  .diagram{background:#f8fbff;border:1px solid #e5edf8;margin-top:16px;padding:18px;border-radius:10px}
+  .diagram pre{white-space:pre-wrap;font-size:13px;color:#334155;margin:0}
+  footer{text-align:center;color:#94a3b8;font-size:.9rem;margin:40px 0 20px}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html">Inicio</a>
+    <a href="proyectos.html">Proyectos</a>
+  </div>
+</nav>
+
+<header>
+  <h1>Comunidad Hogar – Centralized Retail Workflow System</h1>
+  <p>
+    Sistema corporativo que centraliza la comunicación entre los <strong>75 centros de Hogar</strong> y el área de Compras,
+    eliminando correos manuales, errores recurrentes y falta de trazabilidad en las solicitudes operativas.
+  </p>
+</header>
+
+<main>
+
+<h2>Problema detectado</h2>
+<p>
+Antes de Comunidad Hogar, las tiendas enviaban decenas de correos diarios a Compras con dudas sobre surtido,
+referencias, reposiciones o discrepancias de stock. No existía un canal unificado, ni prioridades, ni histórico.
+Esto provocaba:
+</p>
+
+<ul>
+  <li>Duplicidades y respuestas inconsistentes según el interlocutor</li>
+  <li>Pérdida de información y ausencia de seguimiento</li>
+  <li>Retrasos en la resolución de incidencias de surtido</li>
+  <li>Interrupciones continuas a los equipos de planificación y compras</li>
+  <li>Riesgo de roturas de stock en tienda por falta de alineamiento</li>
+</ul>
+
+<h2>Solución implementada</h2>
+<p>
+Diseñé y coordiné la construcción de un <strong>único sistema corporativo</strong> de solicitudes y validaciones:
+<strong>Comunidad Hogar</strong>. Este workflow estructura la petición desde su origen, valida la referencia,
+prioriza según criticidad, distribuye la tarea al área responsable y garantiza trazabilidad completa del ciclo.
+</p>
+
+<h2>Arquitectura funcional</h2>
+<div class="diagram">
+<pre>
+[Tiendas Hogar] 
+     │  Solicitudes validadas
+     ▼
+[Comunidad Hogar Workflow]
+     │  Enrutamiento automático
+ ┌───┴─────────────────────┐
+ │ Compras │ Surtido │ Planificación │ Pricing
+ └───┬─────────────────────┘
+     │  Respuesta estandarizada
+     ▼
+[Centros Hogar / Tiendas]
+</pre>
+</div>
+
+<h2>Stack tecnológico</h2>
+<div class="stack">
+  <span class="pill">SAS</span>
+  <span class="pill">SQL</span>
+  <span class="pill">ETL Automation</span>
+  <span class="pill">Workflow Retail</span>
+</div>
+
+<h2>KPIs e impacto</h2>
+<ul>
+  <li><strong>-78%</strong> de tiempo medio de resolución de incidencias</li>
+  <li><strong>-65%</strong> de correos operativos entre tiendas y Compras</li>
+  <li><strong>+100%</strong> de trazabilidad en cada solicitud</li>
+  <li><strong>0%</strong> dependencia de personas concretas para la operativa</li>
+  <li><strong>75 centros</strong> operando bajo un sistema homogéneo</li>
+</ul>
+
+<h2>Mi aportación directa</h2>
+<ul>
+  <li>Definición y diseño del workflow completo</li>
+  <li>Estandarización de criterios y mensajes corporativos</li>
+  <li>Integración de validaciones SAS/SQL y automatismos</li>
+  <li>Onboarding y formación a equipos de Hogar</li>
+</ul>
+
+<h2>Resultado estratégico</h2>
+<p>
+Comunidad Hogar transformó un proceso reactivo y desordenado en una <strong>plataforma escalable y trazable</strong>,
+alineada con Compras, Planificación y Dirección, elevando la eficiencia operativa y la garantía de stock en tienda.
+</p>
+
+</main>
+
+<footer>
+© 2025 Diego Martín-Romo — Mathematician · Data Analyst · Business Controller
+</footer>
+</body>
+</html>
