@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sistema de Alertas de Surtido — Proyecto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:'Roboto',sans-serif;margin:0;background:#f7f9fc;color:#111}
+    nav{position:fixed;top:0;left:0;right:0;background:#e9eef9;padding:12px 20px;box-shadow:0 2px 6px rgba(0,0,0,0.05);z-index:1000}
+    nav .wrap{max-width:1100px;margin:0 auto;display:flex;gap:16px}
+    nav a{text-decoration:none;color:#0A66C2;font-weight:600}
+    header{margin-top:72px;padding:28px 20px;background:white;border-bottom:1px solid #eef3fb}
+    header h1{margin:0;color:#0A66C2;font-size:1.45rem}
+    header p{margin-top:8px;color:#334155}
+    main{max-width:1100px;margin:28px auto;padding:24px;background:white;border-radius:12px;box-shadow:0 12px 32px rgba(10,102,194,0.04)}
+    h2{color:#0A66C2;margin-top:28px}
+    p, li{line-height:1.55;color:#263248}
+    ul{margin-left:18px}
+    .stack{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .pill{background:#f1f6ff;color:#0A66C2;padding:6px 8px;border-radius:999px;font-size:12px;font-weight:600}
+    .diagram{background:#f8fbff;border:1px solid #e5edf8;margin-top:16px;padding:16px;border-radius:8px;white-space:pre-wrap;font-family:monospace;color:#213547}
+    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:14px}
+    .kpi{background:#f8fbff;padding:12px;border-radius:10px;text-align:center;box-shadow:0 6px 18px rgba(10,102,194,0.03)}
+    .kpi .num{font-weight:700;color:#0A66C2;font-size:1.2rem}
+    footer{text-align:center;color:#94a3b8;font-size:.9rem;margin:36px 0 12px}
+    @media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:520px){.kpis{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html">Inicio</a>
+    <a href="proyectos.html">Proyectos</a>
+  </div>
+</nav>
+
+<header>
+  <h1>Sistema de Alertas de Surtido</h1>
+  <p>Proceso semanal automatizado para identificar y priorizar incidencias de surtido en la red de centros, analizando una base de datos del orden de millones de filas (≈ 6M rows) y ~300.000 referencias distribuidas en ~65 centros.</p>
+</header>
+
+<main>
+  <h2>Resumen ejecutivo</h2>
+  <p>
+    Sistema de Alertas de Surtido diseñado para detectar errores de surtido, coberturas insuficientes y referencias mal configuradas en la red de tiendas. Se ejecuta semanalmente sobre una base de datos masiva (millones de filas), por lo que su implementación se realizó en entorno programado (SAS / SQL / Python), no en hojas de cálculo. El objetivo: priorizar acciones correctivas, reducir roturas y liberar tiempo operativo en tiendas y oficinas.
+  </p>
+
+  <h2>Contexto y problema</h2>
+  <ul>
+    <li>Entrada masiva de peticiones y detección tardía de casos de falta de surtido o surtido incorrecto.</li>
+    <li>Procesos manuales no escalables: Excel no soporta el volumen ni la complejidad (≈ 6M filas, ~300k referencias).</li>
+    <li>Impacto directo en disponibilidad de stock, interrupciones operativas y coste de oportunidad por ventas perdidas.</li>
+  </ul>
+
+  <h2>Solución implementada</h2>
+  <p>Diseñé e implementé un pipeline semanal que:</p>
+  <ul>
+    <li>Ingesta y limpieza automatizada de datos (SAS/SQL).</li>
+    <li>Validaciones de codificación y reglas de surtido por cluster.</li>
+    <li>Generación de alertas priorizadas con criterios de criticidad (ventas esperadas, cobertura, roturas históricas).</li>
+    <li>Distribución automatizada de alertas a responsables vía dashboard y resumen por correo.</li>
+  </ul>
+
+  <h2>Arquitectura (diagrama)</h2>
+  <div class="diagram">
+[Fuentes: ventas, stock, pedidos]  (ETL nightly)  =>  [Staging SQL/SAS] 
+           │
+           ▼
+    [Motor validación & reglas]  (checks por referencia-centro sobre ~300k refs)
+           │
+           ▼
+    [Clasificador de criticidad]  (prioriza por impacto)
+           │
+           ▼
+    [Distribución] -> Dashboards / CSVs / Emails automáticos / Tickets
+  </div>
+
+  <h2>Tech stack</h2>
+  <div class="stack">
+    <span class="pill">SAS</span>
+    <span class="pill">SQL</span>
+    <span class="pill">Python (orquestación)</span>
+    <span class="pill">ETL Automation</span>
+    <span class="pill">Reporting / Dashboards</span>
+  </div>
+
+  <h2>KPI & resultados (impacto estimado)</h2>
+  <div class="kpis">
+    <div class="kpi"><div class="num">-65%</div><div>Reducción de correos operativos entre tiendas y Compras</div></div>
+    <div class="kpi"><div class="num">-72%</div><div>Tiempo medio de detección de incidencias</div></div>
+    <div class="kpi"><div class="num">-40%</div><div>Reducción estimada de roturas relacionadas con surtido</div></div>
+    <div class="kpi"><div class="num">≈ 6M</div><div>Filas procesadas semanalmente (aprox.)</div></div>
+    <div class="kpi"><div class="num">~300k</div><div>Referencias evaluadas</div></div>
+    <div class="kpi"><div class="num">~65</div><div>Centros cubiertos por el proceso</div></div>
+  </div>
+
+  <h2>Operativa y frecuencia</h2>
+  <p>
+    El proceso corre semanalmente (cron programado). Flujo típico:
+  </p>
+  <ul>
+    <li>Extracción nocturna de ventas, stock y pedidos (ETL).</li>
+    <li>Normalización y validación de codificación (SAS/SQL).</li>
+    <li>Aplicación de reglas de surtido por cluster y cálculo de criticidad.</li>
+    <li>Generación de pack de alertas y envío a responsables con instrucciones de acción.</li>
+  </ul>
+
+  <h2>Mi aportación directa</h2>
+  <ul>
+    <li>Definí la lógica de negocio y las reglas que determinan la criticidad de una alerta.</li>
+    <li>Construí los procesos de ingestión y validación en SAS/SQL capaces de operar sobre ~6M filas.</li>
+    <li>Implementé el clasificador de prioridades y la plantilla de distribución automática.</li>
+    <li>Diseñé los KPIs de seguimiento y lideré el despliegue operativo con compradores y responsables de centro.</li>
+  </ul>
+
+  <h2>Antes / Después (ejemplo)</h2>
+  <ul>
+    <li><strong>Antes:</strong> detección manual de errores, alta carga de correos, respuesta lenta y múltiples duplicidades.</li>
+    <li><strong>Después:</strong> detección automatizada, alertas priorizadas, reducción de interrupciones y mayor garantía de stock.</li>
+  </ul>
+
+  <h2>Notas técnicas y escalabilidad</h2>
+  <p>
+    Dado el volumen de datos, toda la lógica se ejecuta en entornos programados (SAS/SQL) con pasos de orquestación en Python. El diseño permite escalar a más divisiones y aumentar la frecuencia de ejecución (de semanal a diaria) sin cambios en la arquitectura base.
+  </p>
+
+</main>
+
+<footer>© 2025 Diego Martín-Romo — Mathematician · Data Analyst · Business Controller</footer>
+</body>
+</html>
