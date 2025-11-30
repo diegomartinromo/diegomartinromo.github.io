@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Predictive Assortment Engine — Motor Predictivo de Surtido</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  body{font-family:'Roboto',sans-serif;margin:0;background:#f7f9fc;color:#111}
+  nav{position:fixed;top:0;left:0;right:0;background:#e9eef9;padding:12px 20px;box-shadow:0 2px 6px rgba(0,0,0,0.05);z-index:1000}
+  nav .wrap{max-width:1100px;margin:0 auto;display:flex;gap:16px}
+  nav a{text-decoration:none;color:#0A66C2;font-weight:600}
+  header{margin-top:72px;padding:32px 20px;background:white;border-bottom:1px solid #eef3fb}
+  header h1{margin:0;color:#0A66C2;font-size:1.45rem}
+  header p{margin-top:8px;color:#334155}
+  main{max-width:1100px;margin:28px auto;padding:24px;background:white;border-radius:12px;box-shadow:0 12px 32px rgba(10,102,194,0.04)}
+  h2{color:#0A66C2;margin-top:28px}
+  p, li{line-height:1.55;color:#263248}
+  ul{margin-left:18px}
+  .stack{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .pill{background:#f1f6ff;color:#0A66C2;padding:6px 8px;border-radius:999px;font-size:12px;font-weight:600}
+  .diagram{background:#f8fbff;border:1px solid #e5edf8;margin-top:16px;padding:16px;border-radius:8px;white-space:pre-wrap;font-family:monospace;color:#213547}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:14px}
+  .kpi{background:#f8fbff;padding:12px;border-radius:10px;text-align:center;box-shadow:0 6px 18px rgba(10,102,194,0.03)}
+  .kpi .num{font-weight:700;color:#0A66C2;font-size:1.2rem}
+  .note{font-size:0.92rem;color:#475569;margin-top:8px}
+  footer{text-align:center;color:#94a3b8;font-size:.9rem;margin:36px 0 12px}
+  @media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.kpis{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html">Inicio</a>
+    <a href="proyectos.html">Proyectos</a>
+  </div>
+</nav>
+
+<header>
+  <h1>Predictive Assortment Engine — Motor Predictivo de Surtido</h1>
+  <p>Motor predictivo y gobernado que genera semanalmente la propuesta de implantación en tienda por referencia–centro,
+     ajustando profundidad del surtido dentro de bandas de cobertura (30–90 días) y respetando reglas comerciales, logísticas y de presencia mínima.</p>
+</header>
+
+<main>
+
+<h2>Resumen ejecutivo</h2>
+<p>
+Sistema algorítmico que reemplaza el proceso manual y heterogéneo de definición de surtidos por una propuesta automática, explicada y trazable. Ejecutado semanalmente sobre bases de datos masivas (millones de filas), combina reglas de negocio con métricas (rotación, elasticidad, tiempos logísticos y clusterización) para proponer incrementos o reducciones progresivas (±20%) hasta alcanzar la horquilla óptima de cobertura.
+</p>
+
+<h2>Problema corporativo</h2>
+<ul>
+  <li>Decisiones de surtido dispersas entre gestores: informes no homogéneos y criterios distintos por persona.</li>
+  <li>Errores recurrentes: asignaciones erróneas de surtido, sobrecarga de stock o roturas por falta de presencia.</li>
+  <li>Excel no escala: volumen de datos (≈ millones de filas) impide procesos reproducibles y auditables.</li>
+</ul>
+
+<h2>Qué hace el motor</h2>
+<ul>
+  <li>Evalúa cada combinación referencia–centro (≈ 300k referencias vs ~65 centros) con datos históricos y en curso.</li>
+  <li>Calcula cobertura (días) y compara con la horquilla objetivo definida por tipología y logística (30–90 días).</li>
+  <li>Aplica ajustes semanales graduales (por ejemplo ±20%) hasta converger en la banda óptima, respetando presencia mínima.</li>
+  <li>Prioriza según criticidad (ventas esperadas, impacto en rotura, tiempo de tránsito a Canarias, almacenable vs no almacenable).</li>
+  <li>Genera propuestas con motivo y trazabilidad para que el gestor valide (qué cambia, por qué y con qué impacto estimado).</li>
+</ul>
+
+<h2>Variables y reglas consideradas</h2>
+<ul>
+  <li>Rotación histórica y ventana de venta reciente (para evitar sesgos por picos puntuales).</li>
+  <li>Elasticidad estimada y ranking de referencia dentro del departamento.</li>
+  <li>Tiempos logísticos proveedor → almacén → tienda (incluye tratamiento especial para Canarias).</li>
+  <li>Tipo de mercancía: almacenable vs no almacenable (impacta en tiempos y niveles mínimos).</li>
+  <li>Restricciones comerciales: marcas excluidas, referencias no permitidas en determinados centros.</li>
+  <li>Regla de incremento/decremento: cambios semanales en bloques del 10–20% para evitar desajustes bruscos.</li>
+</ul>
+
+<h2>Arquitectura (diagrama)</h2>
+<div class="diagram">
+[Orígenes de datos: ventas, stock, pedidos, tránsito]  (ETL nocturno)  =>  [Staging SQL/SAS]
+             │
+             ▼
+   [Módulo de limpieza y normalización]  (unifica codificaciones)
+             │
+             ▼
+   [Motor Predictivo: reglas + heurísticos de cobertura]
+       - Calcula cobertura destino (30–90 días)
+       - Aplica elasticidad/rotación
+       - Evalúa logística (Canarias, tiempo tránsito)
+             │
+             ▼
+   [Control de negocio y validaciones] (aplica restricciones comerciales)
+             │
+             ▼
+   [Entrega] → Informe propuesto por referencia–centro (CSV / Dashboard)
+             → Registro de trazabilidad (qué-cambia-porqué)
+</div>
+
+<h2>Tech stack</h2>
+<div class="stack">
+  <span class="pill">SAS</span>
+  <span class="pill">SQL</span>
+  <span class="pill">Python (orquestación)</span>
+  <span class="pill">ETL Automation</span>
+  <span class="pill">Dashboards / Reporting</span>
+</div>
+
+<h2>KPI & resultados (tus cifras)</h2>
+<p class="note">Impacto medido/estimado tras despliegue y fase de control con gestores de stock.</p>
+<div class="kpis">
+  <div class="kpi"><div class="num">-60%</div><div>Tiempos de análisis humano por gestor de stock</div></div>
+  <div class="kpi"><div class="num">-10%</div><div>Correcciones manuales necesarias (post-propuesta)</div></div>
+  <div class="kpi"><div class="num">+70%</div><div>Homogeneización de criterios entre divisiones</div></div>
+  <div class="kpi"><div class="num">-40%</div><div>Desviaciones fuera de la banda objetivo (30–90 días)</div></div>
+  <div class="kpi"><div class="num">100%</div><div>Trazabilidad de cambios propuestos (motivo + datos)</div></div>
+</div>
+
+<h2>Operativa y gobernanza</h2>
+<ul>
+  <li>Ejecución semanal cron: ETL nocturno → cálculo → paquete de propuestas.</li>
+  <li>Entrega en formato estructurado (CSV + visión en dashboard) con campo explicativo: "por qué se propone".</li>
+  <li>Gestor visualiza, acepta/modifica o rechaza; la decisión queda registrada con justificante.</li>
+  <li>Control de riesgos: límites máximos/minimos por referencia y reglas de “no escalar” ante eventos atípicos detectados (p. ej. compra institucional puntal).</li>
+</ul>
+
+<h2>Mi aportación directa</h2>
+<ul>
+  <li>Definición del producto: bandas de cobertura, reglas de ajuste y lógica de gobernanza.</li>
+  <li>Implementación de pipelines SAS/SQL capaces de procesar millones de filas semanalmente.</li>
+  <li>Integración de factores logísticos (Canarias, tránsito) y restricciones comerciales en el motor.</li>
+  <li>Despliegue y acompañamiento operativo con 25 gestores de stock: formación, pruebas y control de adopción.</li>
+</ul>
+
+<h2>Antes / Después (impacto operativo)</h2>
+<ul>
+  <li><strong>Antes:</strong> procesos manuales y heterogéneos, tiempo alto por gestor, discrepancias frecuentes y roturas.</li>
+  <li><strong>Después:</strong> proceso homogéneo y trazable, propuestas explicadas, reducción del 60% del tiempo de análisis por gestor y notable descenso de desviaciones fuera de banda.</li>
+</ul>
+
+<h2>Escalabilidad y siguientes pasos</h2>
+<p>
+Diseñado para escalar a otras divisiones y para aumentar frecuencia (de semanal a diaria) si se decide. Siguientes iteraciones previstas: incorporar modelos de machine learning para detectar cambios de patrón (picos anómalos) y un panel de control centralizado para priorización automática en ventanas críticas.
+</p>
+
+</main>
+
+<footer>© 2025 Diego Martín-Romo — Mathematician · Data Analyst · Business Controller</footer>
+</body>
+</html>
